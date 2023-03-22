@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 @Path("/hello")
 public class GreetingResource {
 
+    public static final String BASIC_STRING = "123456789asdfghjkl3245ffffff23t4rg4rt45zrt57h5g4jhg54kk4jj5k4hj3lk45jh4l5hjk4öl5kjl4ö5jk3lö453lkä4lö";
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
@@ -20,18 +22,26 @@ public class GreetingResource {
     }
 
     @Path("getString")
+    @Produces(MediaType.TEXT_PLAIN)
     @GET
-    public String getString(@QueryParam("times")@DefaultValue("1") Integer times) {
-        String basicString = "123456789asdfghjkl3245ffffff23t4rg4rt45zrt57h5g4jhg54kk4jj5k4hj3lk45jh4l5hjk4öl5kjl4ö5jk3lö453lkä4lö";
+    public String getString(@QueryParam("times") @DefaultValue("1") Integer times) {
+
         StringBuilder sb = new StringBuilder();
-        for (int i=0; i<times;i++ ) {
-            sb.append(basicString);
+        for (int i = 0; i < times; i++) {
+            sb.append(BASIC_STRING);
         }
         String finalString = sb.toString();
         Logger logger = LoggerFactory.getLogger(getClass());
-        logger.info("Built string with {} chars. bytes: {}",finalString.length(), finalString.getBytes(StandardCharsets.UTF_8).length);
+        logger.info("Built string with {} chars. bytes: {}", finalString.length(), finalString.getBytes(StandardCharsets.UTF_8).length);
 
         logger.info("java.version: " + System.getProperty("java.version"));
         return finalString;
+    }
+
+    @Path("getString")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public String getStringJson(@QueryParam("times") @DefaultValue("1") Integer times) {
+        return getString(times);
     }
 }
