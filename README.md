@@ -23,7 +23,7 @@ This example creates an endpoint which produces a response with a string length 
 1. install Azure Functions Core Tools
 2. git clone https://github.com/franden/quarkus-azure-fn-issue-8k-body
 3. mvnw clean package azure-functions:run -DskipTests=true -DenableDebug
-4. curl http://localhost:7071/api/hello/getString?times=79 --get -v
+4. curl http://localhost:7071/api/jaxrs?times=79 --get -v
 
 The last line will let the application produce and return a string with length of 8295 Bytes.
-curl http://localhost:7071/api/hello/getString?times=78 --get -v will work, because it produces a string with length 8190 Bytes
+curl http://localhost:7071/api/jaxrs?times=78 --get -v will work, because it produces a string with length 8190 Bytes
